@@ -1,5 +1,5 @@
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import RequestCard from '@/components/request-card';
+import ModdingCard from '@/components/modding-card';
 import Footer from '@/components/layout/footer';
 
 export default function MyRequestPage() {
@@ -21,10 +21,10 @@ export default function MyRequestPage() {
         </Select>
       </div>
       <div className='grid grid-cols-1 sm:grid-cols-3 gap-4'>
-        <RequestCard />
-        <RequestCard />
-        <RequestCard />
-        <RequestCard />
+        <ModdingCard />
+        <ModdingCard />
+        <ModdingCard />
+        <ModdingCard />
       </div>
       <Footer />
     </div>

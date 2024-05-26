@@ -38,3 +38,22 @@
     @apply bg-background text-foreground;
   }
 }
+
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(220.2 60% 10.9%);
+}
+
+::-webkit-scrollbar-thumb {
+  background: hwb(215 20.2% 65.1%);
+  border-radius: 20px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hwb(215 20.2% 55.1%);
+}

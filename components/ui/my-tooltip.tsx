@@ -7,7 +7,7 @@ type MyTooltipProps = {
 
 export default function MyTooltip({ message, children }: MyTooltipProps) {
   return (
-    <TooltipProvider>
+    <TooltipProvider delayDuration={0}>
       <Tooltip>
         <TooltipTrigger asChild>{children}</TooltipTrigger>
         <TooltipContent className='bg-background/80 border border-primary/20 text-white'>
