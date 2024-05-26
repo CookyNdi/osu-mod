@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 
@@ -13,7 +15,9 @@ export default function HomeContents() {
           <CardDescription>last seen 1 minutes ago</CardDescription>
         </CardHeader>
         <CardContent className='flex justify-end'>
-          <Button>Queue</Button>
+          <Link href={'/CookyNdi'}>
+            <Button>Queue</Button>
+          </Link>
         </CardContent>
       </Card>
       <Card>

@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -21,6 +23,9 @@ export default function Profile() {
         <div>
           <DropdownMenuLabel>CookyNdi</DropdownMenuLabel>
           <DropdownMenuSeparator />
+          <Link href={'/settings'}>
+            <DropdownMenuItem className='cursor-pointer'>Settings</DropdownMenuItem>
+          </Link>
           <DropdownMenuItem className='cursor-pointer'>Log out</DropdownMenuItem>
         </div>
       </DropdownMenuContent>
