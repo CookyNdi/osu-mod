@@ -1,5 +1,8 @@
 import type { NextAuthOptions } from 'next-auth';
 import OsuProvider from 'next-auth/providers/osu';
+import { getUserById } from './data/users';
+import { createUser } from './actions/create.user';
+import { OsuUserDetails } from './types/osu-respone-api';
 
 export const options = {
   providers: [
@@ -9,6 +12,14 @@ export const options = {
     }),
   ],
   callbacks: {
+    async signIn({ user, profile }) {
+      const existingUser = await getUserById(`${user.id}`);
+      if (!existingUser) {
+        const user = createUser(profile as OsuUserDetails);
+        if (!user) return false;
+      }
+      return true;
+    },
     async session({ token, session }) {
       if (token.sub && session.user) {
         session.user.id = token.sub;

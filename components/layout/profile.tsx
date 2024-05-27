@@ -25,13 +25,13 @@ export default function Profile({ session }: ProfileProps) {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Avatar className='cursor-pointer'>
-          <AvatarImage src={session.user.image as string} />
-          <AvatarFallback>{session.user?.name?.slice(0, 1)}</AvatarFallback>
+          <AvatarImage src={session?.user?.image || 'https://a.ppy.sh/16983379?1677463087.jpeg'} />
+          <AvatarFallback>{session.user?.name?.slice(0, 1) || 'A'}</AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>
       <DropdownMenuContent className='w-56 z-[120]' align='end'>
         <div>
-          <DropdownMenuLabel>{session.user?.name}</DropdownMenuLabel>
+          <DropdownMenuLabel>{session.user?.name || ''}</DropdownMenuLabel>
           <DropdownMenuSeparator />
           <Link href={'/settings'}>
             <DropdownMenuItem className='cursor-pointer'>Settings</DropdownMenuItem>

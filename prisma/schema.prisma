@@ -16,14 +16,13 @@ datasource db {
 model Users {
   id                      String     @id
   username                String
-  previous_usernames      String
+  previous_usernames      String[]
   country                 String
   avatar_url              String
-  title                   String
   ranked_beatmapset_count Int        @default(0)
   guest_beatmapset_count  Int        @default(0)
   loved_beatmapset_count  Int        @default(0)
-  last_action             DateTime
+  last_action             DateTime   @default(now())
   createdAt               DateTime   @default(now())
   Settings                Settings[]
   Request                 Request[]
