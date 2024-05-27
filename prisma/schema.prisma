@@ -1,0 +1,76 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Users {
+  id                      String     @id
+  username                String
+  previous_usernames      String
+  country                 String
+  avatar_url              String
+  title                   String
+  ranked_beatmapset_count Int        @default(0)
+  guest_beatmapset_count  Int        @default(0)
+  loved_beatmapset_count  Int        @default(0)
+  last_action             DateTime
+  createdAt               DateTime   @default(now())
+  Settings                Settings[]
+  Request                 Request[]
+}
+
+model Settings {
+  id               String   @id @default(cuid())
+  userId           String
+  open             Boolean  @default(false)
+  queue_limit      Int      @default(10)
+  request_cooldown Int      @default(1)
+  modes            String[]
+  modder_type      String
+  user             Users    @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Request {
+  id             String   @id @default(cuid())
+  userId         String
+  targetUserId   String
+  beatmapId      Int
+  status         String
+  mapper_message String
+  archived       Boolean  @default(false)
+  feedback       String
+  createdAt      DateTime @default(now())
+  user           Users    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  beatmap        Beatmaps @relation(fields: [beatmapId], references: [id], onDelete: Cascade)
+}
+
+model Beatmaps {
+  id             Int              @id
+  artist         String
+  title          String
+  bpm            Int
+  length         Int
+  cover_url      String
+  creator        String
+  BeatmapSetDiff BeatmapSetDiff[]
+  Request        Request[]
+}
+
+model BeatmapSetDiff {
+  id                String   @id @default(cuid())
+  beatmapId         Int
+  difficulty_rating Int
+  mode              String
+  version           String
+  beatmaps          Beatmaps @relation(fields: [beatmapId], references: [id], onDelete: Cascade)
+}
