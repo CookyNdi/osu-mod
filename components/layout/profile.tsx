@@ -1,4 +1,6 @@
+'use client';
 import Link from 'next/link';
+import { Session } from 'next-auth';
 
 import {
   DropdownMenu,
@@ -9,24 +11,34 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { signOut } from 'next-auth/react';
 
-export default function Profile() {
+type ProfileProps = {
+  session: Session;
+};
+
+export default function Profile({ session }: ProfileProps) {
+  const onClick = () => {
+    signOut();
+  };
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Avatar className='cursor-pointer'>
-          <AvatarImage src='https://a.ppy.sh/16983379?1677463087.jpeg' />
-          <AvatarFallback>C</AvatarFallback>
+          <AvatarImage src={session.user.image as string} />
+          <AvatarFallback>{session.user?.name?.slice(0, 1)}</AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>
       <DropdownMenuContent className='w-56 z-[120]' align='end'>
         <div>
-          <DropdownMenuLabel>CookyNdi</DropdownMenuLabel>
+          <DropdownMenuLabel>{session.user?.name}</DropdownMenuLabel>
           <DropdownMenuSeparator />
           <Link href={'/settings'}>
             <DropdownMenuItem className='cursor-pointer'>Settings</DropdownMenuItem>
           </Link>
-          <DropdownMenuItem className='cursor-pointer'>Log out</DropdownMenuItem>
+          <DropdownMenuItem className='cursor-pointer' onClick={onClick}>
+            Log out
+          </DropdownMenuItem>
         </div>
       </DropdownMenuContent>
     </DropdownMenu>
