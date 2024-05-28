@@ -30,7 +30,7 @@ model Users {
 
 model Settings {
   id               String   @id @default(cuid())
-  userId           String
+  userId           String   @unique
   open             Boolean  @default(false)
   queue_limit      Int      @default(10)
   request_cooldown Int      @default(1)
