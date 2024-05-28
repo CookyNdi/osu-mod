@@ -1,7 +1,7 @@
 import type { NextAuthOptions } from 'next-auth';
 import OsuProvider from 'next-auth/providers/osu';
 import { getUserById } from './data/users';
-import { createUser } from './actions/create.user';
+import { createUser } from './actions/user/create';
 import { OsuUserDetails } from './types/osu-respone-api';
 
 export const options = {
