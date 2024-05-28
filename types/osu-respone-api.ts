@@ -149,6 +149,7 @@ export type OsuUserDetails = {
   };
   ranked_and_approved_beatmapset_count: number;
   unranked_beatmapset_count: number;
+  error: string;
 };
 
 export type OsuBeatmapSetDetails = {
@@ -333,4 +334,5 @@ export type OsuBeatmapSetDetails = {
     profile_colour: string;
     username: string;
   };
+  error: string;
 };

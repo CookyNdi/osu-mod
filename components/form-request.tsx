@@ -1,4 +1,5 @@
 'use client';
+import { useState, useTransition } from 'react';
 import * as z from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
@@ -9,12 +10,21 @@ import { Button } from './ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { Input } from './ui/input';
 import { formRequest } from '@/schemas';
+import { createRequest } from '@/actions/request/create';
+import { FormError } from './form-error';
+import { FormSuccess } from './form-success';
 
 type FormRequestProps = {
   children: React.ReactNode;
+  targetUserId: string;
 };
 
-export default function FormRequest({ children }: FormRequestProps) {
+export default function FormRequest({ children, targetUserId }: FormRequestProps) {
+  const [isPending, startTransition] = useTransition();
+  const [error, setError] = useState<string | undefined>();
+  const [success, setSuccess] = useState<string | undefined>();
+  const [open, setOpen] = useState<boolean>(false);
+
   const form = useForm<z.infer<typeof formRequest>>({
     resolver: zodResolver(formRequest),
     defaultValues: {
@@ -25,10 +35,21 @@ export default function FormRequest({ children }: FormRequestProps) {
 
   const onSubmit = (values: z.infer<typeof formRequest>) => {
     console.log(values);
+    startTransition(() => {
+      createRequest(targetUserId, values)
+        .then((data) => {
+          setError(data.error);
+          setSuccess(data.success);
+          if (data.success) {
+            setOpen(false);
+          }
+        })
+        .catch(() => setError('Something went wrong'));
+    });
   };
 
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent className='sm:max-w-[525px]'>
         <DialogHeader>
@@ -40,6 +61,7 @@ export default function FormRequest({ children }: FormRequestProps) {
               <FormField
                 control={form.control}
                 name='map_link'
+                disabled={isPending}
                 render={({ field }) => (
                   <FormItem className='grid grid-cols-4 items-center gap-x-4'>
                     <FormLabel className='text-right'>Map Link</FormLabel>
@@ -53,6 +75,7 @@ export default function FormRequest({ children }: FormRequestProps) {
               <FormField
                 control={form.control}
                 name='mapper_comment'
+                disabled={isPending}
                 render={({ field }) => (
                   <FormItem className='grid grid-cols-4 items-center gap-4'>
                     <FormLabel className='text-right'>Comments</FormLabel>
@@ -64,8 +87,14 @@ export default function FormRequest({ children }: FormRequestProps) {
                 )}
               />
             </div>
+            <div className='mb-4'>
+              <FormError message={error} />
+              <FormSuccess message={success} />
+            </div>
             <DialogFooter>
-              <Button type='submit'>Request</Button>
+              <Button type='submit' disabled={isPending}>
+                Request
+              </Button>
             </DialogFooter>
           </form>
         </Form>

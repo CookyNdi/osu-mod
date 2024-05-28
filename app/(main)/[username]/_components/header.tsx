@@ -36,8 +36,10 @@ export default function UserLayoutHeader({ user }: UserLayoutHeaderProps) {
           <p className='text-sm text-muted-foreground'>Loved : {user.loved_beatmapset_count}</p>
           <p className='text-sm text-muted-foreground'>Guest : {user.guest_beatmapset_count}</p>
         </div>
-        <FormRequest>
-          <Button disabled={!user.Settings[0].open} className='disabled:cursor-not-allowed'>Request</Button>
+        <FormRequest targetUserId={user.id}>
+          <Button disabled={!user.Settings[0].open} className='disabled:cursor-not-allowed'>
+            Request
+          </Button>
         </FormRequest>
       </div>
     </div>
