@@ -26,12 +26,12 @@ export default function HomeContents({ users }: HomeContentsProps) {
               <CardTitle className='truncate'>{data.username}</CardTitle>
               <p>{data.Settings[0].open ? 'Open' : 'Closed'}</p>
             </div>
-            <CardDescription>
-              <p className='text-foreground capitalize'>{data.Settings[0].modder_type}</p>
-              <p className='text-xs'>{`Last Seen ${formatDistanceToNow(data.last_action, {
+            <CardDescription className='flex flex-col'>
+              <span className='text-foreground capitalize'>{data.Settings[0].modder_type}</span>
+              <span className='text-xs'>{`Last Seen ${formatDistanceToNow(data.last_action, {
                 addSuffix: true,
                 includeSeconds: true,
-              })}`}</p>
+              })}`}</span>
             </CardDescription>
           </CardHeader>
           <CardContent className='flex justify-end'>
