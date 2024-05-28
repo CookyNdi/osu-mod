@@ -9,19 +9,19 @@ export default function UserLayoutNavbar({ username }: { username: string }) {
   return (
     <div className='flex justify-center items-center gap-x-4 py-2 border-b border-muted-foreground/20'>
       <Link
-        href={'/CookyNdi'}
+        href={`/${username}`}
         className={cn('px-2 py-1', pathname.slice(1) === username && 'bg-muted-foreground/10 rounded-md')}
       >
         Queue
       </Link>
       <Link
-        href={'/CookyNdi/completed'}
+        href={`/${username}/completed`}
         className={cn('px-2 py-1', path.includes('completed') && 'bg-muted-foreground/10 rounded-md')}
       >
         Completed
       </Link>
       <Link
-        href={'/CookyNdi/archives'}
+        href={`/${username}/archives`}
         className={cn('px-2 py-1', path.includes('archives') && 'bg-muted-foreground/10 rounded-md')}
       >
         Archives

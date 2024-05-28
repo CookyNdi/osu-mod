@@ -15,7 +15,7 @@ datasource db {
 
 model Users {
   id                      String     @id
-  username                String
+  username                String     @unique
   previous_usernames      String[]
   country                 String
   avatar_url              String
