@@ -2,6 +2,7 @@
 import { useState, useTransition } from 'react';
 import * as z from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
@@ -25,6 +26,8 @@ export default function FormRequest({ children, targetUserId }: FormRequestProps
   const [success, setSuccess] = useState<string | undefined>();
   const [open, setOpen] = useState<boolean>(false);
 
+  const router = useRouter();
+
   const form = useForm<z.infer<typeof formRequest>>({
     resolver: zodResolver(formRequest),
     defaultValues: {
@@ -42,6 +45,7 @@ export default function FormRequest({ children, targetUserId }: FormRequestProps
           setSuccess(data.success);
           if (data.success) {
             setOpen(false);
+            router.refresh();
           }
         })
         .catch(() => setError('Something went wrong'));

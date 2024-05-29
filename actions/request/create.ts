@@ -54,7 +54,7 @@ export const createRequest = async (targetUserId: string, values: z.infer<typeof
 
     await db.request.create({
       data: {
-        userId: session.user.id,
+        requestUserId: session.user.id,
         targetUserId: targetUserId,
         mapper_message: mapper_comment,
         beatmapId: beatmap.id,
