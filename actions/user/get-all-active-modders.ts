@@ -5,7 +5,7 @@ import { db } from '@/lib/db';
 export const getAllActiveModders = async () => {
   try {
     const user = await db.users.findMany({
-      orderBy: { last_action: 'asc' },
+      orderBy: { last_action: 'desc' },
       include: {
         Settings: {
           select: {

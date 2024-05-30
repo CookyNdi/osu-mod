@@ -9,9 +9,16 @@ export const getAllModderRequest = async (username: string) => {
     if (!user) return [];
     const request = await db.request.findMany({
       where: { targetUserId: user.id },
-      orderBy: { createdAt: 'asc' },
+      orderBy: { createdAt: 'desc' },
       include: {
-        user: { select: { id: true, username: true, avatar_url: true } },
+        user: {
+          select: {
+            id: true,
+            username: true,
+            avatar_url: true,
+            Settings: { select: { modder_type: true } },
+          },
+        },
         beatmap: {
           select: {
             id: true,

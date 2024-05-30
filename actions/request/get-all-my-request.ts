@@ -11,7 +11,7 @@ export const getAllMyRequest = async () => {
     if (!session) return redirect('/auth');
     const request = await db.request.findMany({
       where: { requestUserId: session.user.id },
-      orderBy: { createdAt: 'asc' },
+      orderBy: { createdAt: 'desc' },
       include: {
         user: { select: { id: true, username: true, avatar_url: true } },
         beatmap: {
