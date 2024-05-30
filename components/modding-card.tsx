@@ -43,7 +43,7 @@ export default function ModdingCard({ isEditable, isModderPage, request }: Moddi
           </MapperMessage>
         </div>
         {isEditable && (
-          <FormManageRequest>
+          <FormManageRequest request={request}>
             <Button
               className='absolute z-20 right-2 bottom-2 bg-background/70 p-2 px-[10px] backdrop-blur-sm border-none'
               variant='outline'
