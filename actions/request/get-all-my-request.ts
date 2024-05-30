@@ -13,7 +13,14 @@ export const getAllMyRequest = async () => {
       where: { requestUserId: session.user.id },
       orderBy: { createdAt: 'desc' },
       include: {
-        user: { select: { id: true, username: true, avatar_url: true } },
+        user: {
+          select: {
+            id: true,
+            username: true,
+            avatar_url: true,
+            Settings: { select: { modder_type: true } },
+          },
+        },
         beatmap: {
           select: {
             id: true,
