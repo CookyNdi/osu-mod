@@ -7,10 +7,10 @@ import { Input } from '@/components/ui/input';
 export default function HomeContentFilters() {
   return (
     <div className='flex flex-col lg:flex-row justify-between gap-y-2'>
-      <Input className='w-full lg:w-[280px]' placeholder='Search...' />
+      <Input className='w-full lg:w-[280px] hidden' placeholder='Search...' />
       <div className='flex gap-x-4'>
         <Select>
-          <SelectTrigger className='w-full lg:w-[180px]'>
+          <SelectTrigger className='w-full lg:w-[180px] hidden'>
             <SelectValue placeholder='Mode' />
           </SelectTrigger>
           <SelectContent>
@@ -21,7 +21,7 @@ export default function HomeContentFilters() {
           </SelectContent>
         </Select>
         <Select>
-          <SelectTrigger className='w-full lg:w-[180px]'>
+          <SelectTrigger className='w-full lg:w-[180px] hidden'>
             <SelectValue placeholder='Type' />
           </SelectTrigger>
           <SelectContent>

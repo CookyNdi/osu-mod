@@ -17,7 +17,7 @@ export default function QueueContent({ request, session }: QueueContentProps) {
         <div className='flex items-center justify-between sm:justify-normal gap-x-4'>
           <p className='text-muted-foreground'>Total : {request.length}</p>
           <Select>
-            <SelectTrigger className='w-[215px]'>
+            <SelectTrigger className='w-[215px] hidden'>
               <SelectValue placeholder='Status' />
             </SelectTrigger>
             <SelectContent>
