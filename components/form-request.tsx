@@ -18,9 +18,10 @@ import { FormSuccess } from './form-success';
 type FormRequestProps = {
   children: React.ReactNode;
   targetUserId: string;
+  username: string;
 };
 
-export default function FormRequest({ children, targetUserId }: FormRequestProps) {
+export default function FormRequest({ children, targetUserId, username }: FormRequestProps) {
   const [isPending, startTransition] = useTransition();
   const [error, setError] = useState<string | undefined>();
   const [success, setSuccess] = useState<string | undefined>();
@@ -57,7 +58,7 @@ export default function FormRequest({ children, targetUserId }: FormRequestProps
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent className='sm:max-w-[525px]'>
         <DialogHeader>
-          <DialogTitle>Request To SayuMana</DialogTitle>
+          <DialogTitle>Request To {username}</DialogTitle>
         </DialogHeader>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)}>
