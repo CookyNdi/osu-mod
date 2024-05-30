@@ -1,4 +1,5 @@
 'use client';
+import { useRouter } from 'next/navigation';
 import { useState, useTransition } from 'react';
 import { STATUS } from '@prisma/client';
 
@@ -28,6 +29,8 @@ export default function FormManageRequest({ children, request }: FormManageReque
   const [error, setError] = useState<string | undefined>();
   const [success, setSuccess] = useState<string | undefined>();
 
+  const router = useRouter();
+
   const onSubmit = () => {
     startTransition(() => {
       manageRequest(status as STATUS, feedback, archived, request.targetUserId, request.id)
@@ -36,6 +39,7 @@ export default function FormManageRequest({ children, request }: FormManageReque
           setSuccess(data.success);
           if (data.success) {
             setOpen(false);
+            router.refresh();
           }
         })
         .catch(() => setError('Something went wrong'));

@@ -12,6 +12,7 @@ import { RequestData } from '@/types/request';
 import DiffListIcon from './diff-list-icon';
 import { getDiffColor } from '@/lib/get-diff-color';
 import MyTooltip from './ui/my-tooltip';
+import StatusListIcon from './status-list-icon';
 
 type ModdingCardProps = {
   isEditable?: boolean;
@@ -27,17 +28,27 @@ export default function ModdingCard({ isEditable, isModderPage, request }: Moddi
     <div className='w-full rounded-md overflow-hidden border border-primary/20'>
       <div className='relative w-full h-36'>
         <div className='absolute z-20 right-2 top-2 flex gap-x-2'>
-          <Button className='bg-background/70 p-2 backdrop-blur-sm border-none' variant='outline'>
-            <FaCheck className='text-emerald-500' size={20} />
-          </Button>
-          <Button className='bg-background/70 p-2 backdrop-blur-sm border-none' variant='outline'>
-            {`${request.beatmap.bpm}bpm`}
-          </Button>
-          <Button className='bg-background/70 p-2 backdrop-blur-sm border-none' variant='outline'>
-            {format(request.beatmap.length * 1000, 'mm:ss')}
-          </Button>
-          <MapperMessage message={request.mapper_message}>
+          <MyTooltip message={request.status}>
             <Button className='bg-background/70 p-2 backdrop-blur-sm border-none' variant='outline'>
+              <StatusListIcon status={request.status} />
+            </Button>
+          </MyTooltip>
+          <MyTooltip message={`${request.beatmap.bpm} bpm`}>
+            <Button className='bg-background/70 p-2 backdrop-blur-sm border-none' variant='outline'>
+              {`${request.beatmap.bpm}bpm`}
+            </Button>
+          </MyTooltip>
+          <MyTooltip message={format(request.beatmap.length * 1000, 'mm:ss')}>
+            <Button className='bg-background/70 p-2 backdrop-blur-sm border-none' variant='outline'>
+              {format(request.beatmap.length * 1000, 'mm:ss')}
+            </Button>
+          </MyTooltip>
+          <MapperMessage message={request.mapper_message}>
+            <Button
+              className='bg-background/70 p-2 backdrop-blur-sm border-none'
+              variant='outline'
+              title='Mapper Message!'
+            >
               <FiMessageCircle size={20} />
             </Button>
           </MapperMessage>
