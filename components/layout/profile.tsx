@@ -33,6 +33,12 @@ export default function Profile({ session }: ProfileProps) {
         <div>
           <DropdownMenuLabel>{session.user?.name || ''}</DropdownMenuLabel>
           <DropdownMenuSeparator />
+          <Link href={`/${session.user.name}`}>
+            <DropdownMenuItem className='cursor-pointer'>Your Page</DropdownMenuItem>
+          </Link>
+          <Link href={"/rules"}>
+            <DropdownMenuItem className='cursor-pointer'>Edit Rules</DropdownMenuItem>
+          </Link>
           <Link href={'/settings'}>
             <DropdownMenuItem className='cursor-pointer'>Settings</DropdownMenuItem>
           </Link>

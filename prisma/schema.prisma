@@ -22,6 +22,15 @@ enum STATUS {
   RANKED
 }
 
+enum RulesType {
+  REQUEST_INFORMATION
+  GENRE
+  MAP
+  MAPPER
+  LANGUAGE
+  SONG_DETAILS
+}
+
 model Users {
   id                      String     @id
   username                String     @unique
@@ -35,6 +44,16 @@ model Users {
   createdAt               DateTime   @default(now())
   Settings                Settings[]
   Request                 Request[]
+  Rules                   Rules[]
+}
+
+model Rules {
+  id         String    @id @default(cuid())
+  userId     String
+  type       RulesType
+  message    String
+  isAccepted Boolean
+  user       Users     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model Settings {

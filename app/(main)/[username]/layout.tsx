@@ -1,6 +1,7 @@
 import { getUserByUsername } from '@/actions/user/get-by-username';
 import UserLayoutHeader from './_components/header';
 import UserLayoutNavbar from './_components/navbar';
+import { getRulesByUsername } from '@/actions/rules/get-by-username';
 
 type UserLayoutProps = {
   children: React.ReactNode;
@@ -12,6 +13,7 @@ type UserLayoutProps = {
 export default async function UserLayout({ children, params }: Readonly<UserLayoutProps>) {
   const username = params.username || '';
   const user = await getUserByUsername(username);
+  const rules = await getRulesByUsername(username);
 
   return (
     <div className='w-full flex flex-col gap-y-2'>
@@ -22,7 +24,7 @@ export default async function UserLayout({ children, params }: Readonly<UserLayo
       ) : (
         <>
           <div>
-            <UserLayoutHeader user={user} />
+            <UserLayoutHeader user={user} rules={rules} />
             <UserLayoutNavbar username={username} />
           </div>
           <div>{children}</div>

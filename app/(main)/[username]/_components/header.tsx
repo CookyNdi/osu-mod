@@ -1,5 +1,6 @@
+import RulesList from '@/components/rules-list';
 import { FaIdCard } from 'react-icons/fa';
-import { Users } from '@prisma/client';
+import { Rules, Users } from '@prisma/client';
 
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import MyTooltip from '@/components/ui/my-tooltip';
@@ -14,11 +15,12 @@ type UserLayoutHeaderProps = {
       modder_type: string;
     }[];
   };
+  rules: Rules[];
 };
 
-export default function UserLayoutHeader({ user }: UserLayoutHeaderProps) {
+export default function UserLayoutHeader({ user, rules }: UserLayoutHeaderProps) {
   return (
-    <div className='h-[285px] flex justify-center items-center bg-neutral-500/10 border-b border-muted-foreground/20'>
+    <div className='h-[345px] flex justify-center items-center bg-neutral-500/10 border-b border-muted-foreground/20'>
       <div className='flex flex-col items-center gap-y-2'>
         <Avatar className='w-28 h-28'>
           <AvatarImage src={user.avatar_url || 'https://a.ppy.sh/16983379?1677463087.jpeg'} />
@@ -36,6 +38,9 @@ export default function UserLayoutHeader({ user }: UserLayoutHeaderProps) {
           <p className='text-sm text-muted-foreground'>Loved : {user.loved_beatmapset_count}</p>
           <p className='text-sm text-muted-foreground'>Guest : {user.guest_beatmapset_count}</p>
         </div>
+        <RulesList rules={rules}>
+          <p className='text-lg underline cursor-pointer'>Rules</p>
+        </RulesList>
         <FormRequest targetUserId={user.id}>
           <Button disabled={!user.Settings[0].open} className='disabled:cursor-not-allowed'>
             Request
