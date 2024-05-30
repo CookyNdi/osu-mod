@@ -10,13 +10,12 @@ type QueueContentProps = {
 };
 
 export default function QueueContent({ request, session }: QueueContentProps) {
-  const isOwnModder = session?.user.name === request[0].user.username;
   return (
     <div className='space-y-2'>
       <div className='flex flex-col sm:flex-row justify-between sm:items-center'>
         <h1 className='text-xl font-semibold'>Queue</h1>
         <div className='flex items-center justify-between sm:justify-normal gap-x-4'>
-          <p className='text-muted-foreground'>Total : 14</p>
+          <p className='text-muted-foreground'>Total : {request.length}</p>
           <Select>
             <SelectTrigger className='w-[215px]'>
               <SelectValue placeholder='Status' />
@@ -37,7 +36,12 @@ export default function QueueContent({ request, session }: QueueContentProps) {
       ) : (
         <div className='grid grid-cols-1 sm:grid-cols-3 gap-4'>
           {request.map((data) => (
-            <ModdingCard request={data} key={data.id} isModderPage isEditable={isOwnModder} />
+            <ModdingCard
+              request={data}
+              key={data.id}
+              isModderPage
+              isEditable={session?.user.name === request[0].user.username}
+            />
           ))}
         </div>
       )}
