@@ -6,6 +6,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import MyTooltip from '@/components/ui/my-tooltip';
 import { Button } from '@/components/ui/button';
 import FormRequest from '@/components/form-request';
+import { getSession } from '@/lib/session';
 
 type UserLayoutHeaderProps = {
   user: Users & {
@@ -18,9 +19,11 @@ type UserLayoutHeaderProps = {
   rules: Rules[];
 };
 
-export default function UserLayoutHeader({ user, rules }: UserLayoutHeaderProps) {
+export default async function UserLayoutHeader({ user, rules }: UserLayoutHeaderProps) {
+  const session = await getSession();
+
   return (
-    <div className='h-[345px] flex justify-center items-center bg-neutral-500/10 border-b border-muted-foreground/20'>
+    <div className='h-[345px] relative flex justify-center items-center bg-neutral-500/10 border-b border-muted-foreground/20'>
       <div className='flex flex-col items-center gap-y-2'>
         <Avatar className='w-28 h-28'>
           <AvatarImage src={user.avatar_url || 'https://a.ppy.sh/16983379?1677463087.jpeg'} />
@@ -41,8 +44,11 @@ export default function UserLayoutHeader({ user, rules }: UserLayoutHeaderProps)
         <RulesList rules={rules}>
           <p className='text-lg underline cursor-pointer'>Rules</p>
         </RulesList>
-        <FormRequest targetUserId={user.id}>
-          <Button disabled={!user.Settings[0].open} className='disabled:cursor-not-allowed'>
+        <Button variant='outline' className='text-lg absolute top-4 right-4'>
+          {user.Settings[0].open ? 'Open' : 'Closed'}
+        </Button>
+        <FormRequest targetUserId={user.id} username={user.username}>
+          <Button disabled={!!!user.Settings[0].open || !session} className='disabled:cursor-not-allowed'>
             Request
           </Button>
         </FormRequest>
