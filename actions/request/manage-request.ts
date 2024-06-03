@@ -18,11 +18,19 @@ export const manageRequest = async (
     if (!session) return redirect('/auth');
     if (session.user.id !== targetUserId) return { error: 'Forbidden Access!' };
 
-    await db.request.update({
+    const request = await db.request.update({
       where: { targetUserId: session.user.id, id: requestId },
       data: { status, feedback, archived },
     });
     await db.users.update({ where: { id: session.user.id }, data: { last_action: new Date() } });
+    await db.notification.create({
+      data: {
+        userId: request.requestUserId,
+        requestId: request.id,
+        type: 'CHANGE_STATUS',
+        message: 'changed to',
+      },
+    });
     return { success: 'Setting Updated Successfully' };
   } catch (error) {
     console.log(error);

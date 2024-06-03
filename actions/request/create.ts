@@ -52,12 +52,21 @@ export const createRequest = async (targetUserId: string, values: z.infer<typeof
       beatmap = existingBeatmap;
     }
 
-    await db.request.create({
+    const request = await db.request.create({
       data: {
         requestUserId: session.user.id,
         targetUserId: targetUserId,
         mapper_message: mapper_comment,
         beatmapId: beatmap.id,
+      },
+    });
+
+    await db.notification.create({
+      data: {
+        userId: request.targetUserId,
+        requestId: request.id,
+        type: 'NEW_REQUEST',
+        message: 'new request',
       },
     });
 
