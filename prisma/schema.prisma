@@ -32,19 +32,20 @@ enum RulesType {
 }
 
 model Users {
-  id                      String     @id
-  username                String     @unique
+  id                      String         @id
+  username                String         @unique
   previous_usernames      String[]
   country                 String
   avatar_url              String
-  ranked_beatmapset_count Int        @default(0)
-  guest_beatmapset_count  Int        @default(0)
-  loved_beatmapset_count  Int        @default(0)
-  last_action             DateTime   @default(now())
-  createdAt               DateTime   @default(now())
+  ranked_beatmapset_count Int            @default(0)
+  guest_beatmapset_count  Int            @default(0)
+  loved_beatmapset_count  Int            @default(0)
+  last_action             DateTime       @default(now())
+  createdAt               DateTime       @default(now())
   Settings                Settings[]
   Request                 Request[]
   Rules                   Rules[]
+  Notification            Notification[]
 }
 
 model Rules {
@@ -68,17 +69,18 @@ model Settings {
 }
 
 model Request {
-  id             String   @id @default(cuid())
+  id             String         @id @default(cuid())
   requestUserId  String
   targetUserId   String
   beatmapId      Int
-  status         STATUS   @default(PENDING)
+  status         STATUS         @default(PENDING)
   mapper_message String
-  archived       Boolean  @default(false)
+  archived       Boolean        @default(false)
   feedback       String?
-  createdAt      DateTime @default(now())
-  user           Users    @relation(fields: [targetUserId], references: [id], onDelete: NoAction)
-  beatmap        Beatmaps @relation(fields: [beatmapId], references: [id], onDelete: Cascade)
+  createdAt      DateTime       @default(now())
+  user           Users          @relation(fields: [targetUserId], references: [id], onDelete: NoAction)
+  beatmap        Beatmaps       @relation(fields: [beatmapId], references: [id], onDelete: Cascade)
+  Notification   Notification[]
 }
 
 model Beatmaps {
@@ -100,4 +102,13 @@ model BeatmapSetDiff {
   mode              String
   version           String
   beatmaps          Beatmaps @relation(fields: [beatmapId], references: [id], onDelete: Cascade)
+}
+
+model Notification {
+  id        String   @id @default(cuid())
+  userId    String
+  requestId String
+  createdAt DateTime @default(now())
+  user      Users    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  request   Request  @relation(fields: [requestId], references: [id], onDelete: Cascade)
 }
