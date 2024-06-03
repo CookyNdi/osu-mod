@@ -17,10 +17,9 @@ type UserLayoutHeaderProps = {
     }[];
   };
   rules: Rules[];
-  username: string;
 };
 
-export default async function UserLayoutHeader({ user, rules, username }: UserLayoutHeaderProps) {
+export default async function UserLayoutHeader({ user, rules }: UserLayoutHeaderProps) {
   const session = await getSession();
 
   return (
@@ -48,7 +47,7 @@ export default async function UserLayoutHeader({ user, rules, username }: UserLa
         <Button variant='outline' className='text-lg absolute top-4 right-4'>
           {user.Settings[0].open ? 'Open' : 'Closed'}
         </Button>
-        {user.username !== username && (
+        {user.username !== session?.user.name && (
           <FormRequest targetUserId={user.id} username={user.username}>
             <Button disabled={!!!user.Settings[0].open || !session} className='disabled:cursor-not-allowed'>
               Request

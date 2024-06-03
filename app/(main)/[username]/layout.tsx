@@ -24,7 +24,7 @@ export default async function UserLayout({ children, params }: Readonly<UserLayo
       ) : (
         <>
           <div>
-            <UserLayoutHeader user={user} rules={rules} username={username} />
+            <UserLayoutHeader user={user} rules={rules} />
             <UserLayoutNavbar username={username} />
           </div>
           <div>{children}</div>
