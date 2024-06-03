@@ -15,7 +15,7 @@ export const options = {
     async signIn({ user, profile }) {
       const existingUser = await getUserById(`${user.id}`);
       if (!existingUser) {
-        const user = createUser(profile as OsuUserDetails);
+        const user = await createUser(profile as OsuUserDetails);
         if (!user) return false;
       }
       return true;
