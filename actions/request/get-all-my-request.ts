@@ -1,14 +1,11 @@
 'use server';
 
-import { redirect } from 'next/navigation';
+import { Session } from 'next-auth';
 
 import { db } from '@/lib/db';
-import { getSession } from '@/lib/session';
 
-export const getAllMyRequest = async () => {
+export const getAllMyRequest = async (session: Session) => {
   try {
-    const session = await getSession();
-    if (!session) return redirect('/auth');
     const request = await db.request.findMany({
       where: { requestUserId: session.user.id },
       orderBy: { createdAt: 'desc' },

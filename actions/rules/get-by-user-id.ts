@@ -1,14 +1,11 @@
 'use server';
 
-import { getSession } from '@/lib/session';
-import { redirect } from 'next/navigation';
+import { Session } from 'next-auth';
 
 import { db } from '@/lib/db';
 
-export const getRulesByUserId = async () => {
+export const getRulesByUserId = async (session: Session) => {
   try {
-    const session = await getSession();
-    if (!session) return redirect('/auth');
     const rules = await db.rules.findMany({ where: { userId: session.user.id } });
     return rules;
   } catch (error) {
