@@ -10,7 +10,7 @@ export default function MyRequestContent({ request }: MyRequestContentProps) {
   return (
     <div className='space-y-2'>
       <div className='flex flex-col lg:flex-row justify-between lg:items-center gap-y-2'>
-        <h1 className='text-xl font-bold'>Your Request Previously</h1>
+        <h1 className='text-xl font-bold'>Your Previous Request</h1>
         <Select>
           <SelectTrigger className='w-full lg:w-[180px] hidden'>
             <SelectValue placeholder='Status' />
