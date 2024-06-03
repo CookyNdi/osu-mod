@@ -39,7 +39,7 @@ export const getAllModderRequest = async (username: string) => {
     return request;
   } catch (error) {
     console.log(error);
-    console.log('getAllMyRequest ISSUE');
+    console.log('getAllModderRequest ISSUE');
     return [];
   }
 };

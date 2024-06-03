@@ -39,7 +39,7 @@ export const getAllArchiveRequest = async (username: string) => {
     return request;
   } catch (error) {
     console.log(error);
-    console.log('getAllMyRequest ISSUE');
+    console.log('getAllArchiveRequest ISSUE');
     return [];
   }
 };

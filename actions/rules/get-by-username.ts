@@ -11,7 +11,7 @@ export const getRulesByUsername = async (username: string) => {
     return rules;
   } catch (error) {
     console.log(error);
-    console.log('getRulesByUserId ISSUE');
+    console.log('getRulesByUsername ISSUE');
     return [];
   }
 };

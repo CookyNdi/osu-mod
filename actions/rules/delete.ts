@@ -14,7 +14,7 @@ export const deleteRules = async (rulesId: string) => {
     return { success: 'Rules Created Successfully' };
   } catch (error) {
     console.log(error);
-    console.log('createRules ISSUE');
+    console.log('deleteRules ISSUE');
     return { error: 'Internal server error!' };
   }
 };

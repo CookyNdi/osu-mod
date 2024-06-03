@@ -8,7 +8,7 @@ export const getUserSettings = async (userId: string) => {
     return { success: 'Get Setting Successfully', data: settings };
   } catch (error) {
     console.log(error);
-    console.log('getUserById ISSUE');
+    console.log('getUserSettings ISSUE');
     return { error: 'Internal server error!', data: null };
   }
 };

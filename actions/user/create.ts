@@ -26,7 +26,7 @@ export const createUser = async (osuData: OsuUserDetails) => {
     return true;
   } catch (error) {
     console.log(error);
-    console.log('CREATE USER ISSUE');
+    console.log('createUser ISSUE');
     return false;
   }
 };

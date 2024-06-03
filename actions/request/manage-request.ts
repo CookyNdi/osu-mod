@@ -26,7 +26,7 @@ export const manageRequest = async (
     return { success: 'Setting Updated Successfully' };
   } catch (error) {
     console.log(error);
-    console.log('getAllMyRequest ISSUE');
+    console.log('manageRequest ISSUE');
     return { error: 'Internal server error!' };
   }
 };
