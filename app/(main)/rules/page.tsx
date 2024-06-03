@@ -1,9 +1,14 @@
+import { Metadata } from 'next';
 import { redirect } from 'next/navigation';
 
 import Footer from '@/components/layout/footer';
 import RulesContent from './_components/content';
 import { getRulesByUserId } from '@/actions/rules/get-by-user-id';
 import { getSession } from '@/lib/session';
+
+export const metadata: Metadata = {
+  title: 'Osu Mod | Rules',
+};
 
 export default async function RulesPage() {
   const session = await getSession();

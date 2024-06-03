@@ -1,9 +1,14 @@
-import { getAllMyRequest } from '@/actions/request/get-all-my-request';
+import { Metadata } from 'next';
 import { redirect } from 'next/navigation';
 
+import { getAllMyRequest } from '@/actions/request/get-all-my-request';
 import Footer from '@/components/layout/footer';
 import MyRequestContent from './_components/content';
 import { getSession } from '@/lib/session';
+
+export const metadata: Metadata = {
+  title: 'Osu Mod | My Request',
+};
 
 export default async function MyRequestPage() {
   const session = await getSession();

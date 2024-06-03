@@ -9,6 +9,12 @@ type CompletedPageProps = {
   };
 };
 
+export async function generateMetadata({ params }: CompletedPageProps) {
+  return {
+    title: `${params.username} - Completed`,
+  };
+}
+
 export default async function CompletedPage({ params }: CompletedPageProps) {
   const username = params.username || '';
   const session = await getSession();

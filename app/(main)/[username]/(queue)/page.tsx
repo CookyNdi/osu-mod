@@ -10,6 +10,12 @@ type QueuePageProps = {
   };
 };
 
+export async function generateMetadata({ params }: QueuePageProps) {
+  return {
+    title: `${params.username} - Queue`,
+  };
+}
+
 export default async function QueuePage({ params }: QueuePageProps) {
   const username = params.username || '';
   const session = await getSession();

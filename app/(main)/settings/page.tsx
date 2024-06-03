@@ -1,4 +1,10 @@
+import { Metadata } from 'next';
+
 import SettingsTabs from './_components/tabs';
+
+export const metadata: Metadata = {
+  title: 'Osu Mod | Settings',
+};
 
 export default function SettingsPage() {
   return (

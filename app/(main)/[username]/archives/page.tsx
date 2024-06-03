@@ -9,6 +9,12 @@ type ArchivesPageProps = {
   };
 };
 
+export async function generateMetadata({ params }: ArchivesPageProps) {
+  return {
+    title: `${params.username} - Archives`,
+  };
+}
+
 export default async function ArchivesPage({ params }: ArchivesPageProps) {
   const username = params.username || '';
   const session = await getSession();
