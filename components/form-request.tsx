@@ -12,8 +12,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Input } from './ui/input';
 import { formRequest } from '@/schemas';
 import { createRequest } from '@/actions/request/create';
-import { FormError } from './form-error';
-import { FormSuccess } from './form-success';
+import { useToast } from './ui/use-toast';
 
 type FormRequestProps = {
   children: React.ReactNode;
@@ -23,11 +22,10 @@ type FormRequestProps = {
 
 export default function FormRequest({ children, targetUserId, username }: FormRequestProps) {
   const [isPending, startTransition] = useTransition();
-  const [error, setError] = useState<string | undefined>();
-  const [success, setSuccess] = useState<string | undefined>();
   const [open, setOpen] = useState<boolean>(false);
 
   const router = useRouter();
+  const { toast } = useToast();
 
   const form = useForm<z.infer<typeof formRequest>>({
     resolver: zodResolver(formRequest),
@@ -42,15 +40,25 @@ export default function FormRequest({ children, targetUserId, username }: FormRe
     startTransition(() => {
       createRequest(targetUserId, values)
         .then((data) => {
-          setError(data.error);
-          setSuccess(data.success);
+          if (data.error) {
+            toast({
+              title: data.error,
+            });
+          }
           if (data.success) {
+            toast({
+              title: data.success,
+            });
             setOpen(false);
             form.reset();
             router.refresh();
           }
         })
-        .catch(() => setError('Something went wrong'));
+        .catch(() => {
+          toast({
+            title: 'Something went wrong',
+          });
+        });
     });
   };
 
@@ -92,10 +100,6 @@ export default function FormRequest({ children, targetUserId, username }: FormRe
                   </FormItem>
                 )}
               />
-            </div>
-            <div className='mb-4'>
-              <FormError message={error} />
-              <FormSuccess message={success} />
             </div>
             <DialogFooter>
               <Button type='submit' disabled={isPending}>

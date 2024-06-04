@@ -10,8 +10,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Switch } from '@/components/ui/switch';
 import { updateUserSettings } from '@/actions/user/update-settings';
-import { FormError } from '@/components/form-error';
-import { FormSuccess } from '@/components/form-success';
+import { useToast } from '@/components/ui/use-toast';
 
 type QueueSettingsProps = {
   settings: Settings | null;
@@ -24,10 +23,9 @@ export default function QueueSettings({ settings, userId }: QueueSettingsProps) 
   const [queueLimit, setQueueLimit] = useState<number>(settings?.queue_limit || 10);
   const [requestCooldown, setRequestCooldown] = useState<number>(settings?.request_cooldown || 1);
   const [modderType, setModderType] = useState<string>(settings?.modder_type || 'modder');
+  const { toast } = useToast();
 
   const [isPending, startTransition] = useTransition();
-  const [error, setError] = useState<string | undefined>();
-  const [success, setSuccess] = useState<string | undefined>();
 
   const deleteMode = (index: number) => {
     const newArray = [...modes.slice(0, index), ...modes.slice(index + 1)];
@@ -39,10 +37,22 @@ export default function QueueSettings({ settings, userId }: QueueSettingsProps) 
     startTransition(() => {
       updateUserSettings({ data: { modes, open, queueLimit, requestCooldown, modderType } }, userId)
         .then((data) => {
-          setError(data.error);
-          setSuccess(data.success);
+          if (data.error) {
+            toast({
+              title: data.error,
+            });
+          }
+          if (data.success) {
+            toast({
+              title: data.success,
+            });
+          }
         })
-        .catch(() => setError('Something went wrong'));
+        .catch(() => {
+          toast({
+            title: 'Something went wrong',
+          });
+        });
     });
   };
 
@@ -126,8 +136,6 @@ export default function QueueSettings({ settings, userId }: QueueSettingsProps) 
             </SelectContent>
           </Select>
         </div>
-        <FormError message={error} />
-        <FormSuccess message={success} />
       </CardContent>
       <CardFooter>
         <Button className='w-full' onClick={onSubmit} disabled={isPending}>

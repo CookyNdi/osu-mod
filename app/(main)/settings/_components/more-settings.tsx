@@ -1,11 +1,10 @@
 'use client';
 import { useState, useTransition } from 'react';
 
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { updateUserData } from '@/actions/user/update';
-import { FormError } from '@/components/form-error';
-import { FormSuccess } from '@/components/form-success';
+import { useToast } from '@/components/ui/use-toast';
 
 type MoreSettingsProps = {
   userId: string;
@@ -13,17 +12,28 @@ type MoreSettingsProps = {
 
 export default function MoreSettings({ userId }: MoreSettingsProps) {
   const [isPending, startTransition] = useTransition();
-  const [error, setError] = useState<string | undefined>();
-  const [success, setSuccess] = useState<string | undefined>();
+  const { toast } = useToast();
 
   const onCLick = () => {
     startTransition(() => {
       updateUserData(userId)
         .then((data) => {
-          setError(data.error);
-          setSuccess(data.success);
+          if (data.error) {
+            toast({
+              title: data.error,
+            });
+          }
+          if (data.success) {
+            toast({
+              title: data.success,
+            });
+          }
         })
-        .catch(() => setError('Something went wrong'));
+        .catch(() => {
+          toast({
+            title: 'Something went wrong',
+          });
+        });
     });
   };
   return (
@@ -34,10 +44,6 @@ export default function MoreSettings({ userId }: MoreSettingsProps) {
           This will be update your account data like profile image, username and modder type, etc.
         </CardDescription>
       </CardHeader>
-      <CardContent>
-        <FormError message={error} />
-        <FormSuccess message={success} />
-      </CardContent>
       <CardFooter>
         <Button className='w-full' onClick={onCLick} disabled={isPending}>
           Update Your Account Data

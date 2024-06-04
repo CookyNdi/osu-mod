@@ -9,10 +9,9 @@ import { Button } from './ui/button';
 import { Label } from './ui/label';
 import { Switch } from '@/components/ui/switch';
 import { Textarea } from './ui/textarea';
-import { FormError } from './form-error';
-import { FormSuccess } from './form-success';
 import { manageRequest } from '@/actions/request/manage-request';
 import { RequestData } from '@/types/request';
+import { useToast } from '@/components/ui/use-toast';
 
 type FormManageRequestProps = {
   children: React.ReactNode;
@@ -26,23 +25,32 @@ export default function FormManageRequest({ children, request }: FormManageReque
   const [archived, setArchived] = useState<boolean>(false);
 
   const [isPending, startTransition] = useTransition();
-  const [error, setError] = useState<string | undefined>();
-  const [success, setSuccess] = useState<string | undefined>();
 
   const router = useRouter();
+  const { toast } = useToast();
 
   const onSubmit = () => {
     startTransition(() => {
       manageRequest(status as STATUS, feedback, archived, request.targetUserId, request.id)
         .then((data) => {
-          setError(data.error);
-          setSuccess(data.success);
+          if (data.error) {
+            toast({
+              title: data.error,
+            });
+          }
           if (data.success) {
             setOpen(false);
+            toast({
+              title: data.success,
+            });
             router.refresh();
           }
         })
-        .catch(() => setError('Something went wrong'));
+        .catch(() => {
+          toast({
+            title: 'Something went wrong',
+          });
+        });
     });
   };
 
@@ -100,8 +108,6 @@ export default function FormManageRequest({ children, request }: FormManageReque
               disabled={isPending}
             />
           </div>
-          <FormError message={error} />
-          <FormSuccess message={success} />
         </div>
         <DialogFooter>
           <Button type='submit' onClick={onSubmit}>

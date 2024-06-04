@@ -6,11 +6,10 @@ import { useState, useTransition } from 'react';
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { FormError } from '@/components/form-error';
-import { FormSuccess } from '@/components/form-success';
 import { Switch } from '@/components/ui/switch';
 import { Button } from '@/components/ui/button';
 import { createRules } from '@/actions/rules/create';
+import { useToast } from '@/components/ui/use-toast';
 
 type AddRulesFormProps = {
   rulesType: RulesType;
@@ -22,25 +21,34 @@ export default function AddRulesForm({ children, rulesType }: AddRulesFormProps)
   const [isAccepted, setIsAccepted] = useState<boolean>(true);
 
   const [open, setOpen] = useState<boolean>(false);
-  const [error, setError] = useState<string | undefined>();
-  const [success, setSuccess] = useState<string | undefined>();
 
   const [isPending, startTransition] = useTransition();
   const router = useRouter();
+  const { toast } = useToast();
 
   const onSubmit = () => {
     startTransition(() => {
       createRules(note, rulesType, isAccepted)
         .then((data) => {
-          setError(data.error);
-          setSuccess(data.success);
+          if (data.error) {
+            toast({
+              title: data.error,
+            });
+          }
           if (data.success) {
+            toast({
+              title: data.success,
+            });
             setOpen(false);
             setNote('');
             router.refresh();
           }
         })
-        .catch(() => setError('Something went wrong'));
+        .catch(() => {
+          toast({
+            title: 'Something went wrong',
+          });
+        });
     });
   };
 
@@ -76,8 +84,6 @@ export default function AddRulesForm({ children, rulesType }: AddRulesFormProps)
               disabled={isPending}
             />
           </div>
-          <FormError message={error} />
-          <FormSuccess message={success} />
         </div>
         <DialogFooter>
           <Button type='submit' onClick={onSubmit} disabled={isPending}>

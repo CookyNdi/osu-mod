@@ -12,7 +12,7 @@ export const createRules = async (message: string, type: RulesType, isAccepted: 
     if (!session) return redirect('/auth');
 
     await db.rules.create({ data: { userId: session.user.id, message, type, isAccepted } });
-    return { success: 'Rules Created Successfully' };
+    return { success: `${type} Created Successfully` };
   } catch (error) {
     console.log(error);
     console.log('createRules ISSUE');
