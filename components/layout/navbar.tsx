@@ -5,6 +5,7 @@ import { Button } from '../ui/button';
 import { getSession } from '@/lib/session';
 import Notification from './notification';
 import { getUnReadNotification } from '@/actions/notification/get-un-read-notification';
+import ToolsNav from './tools';
 
 export default async function Navbar() {
   const session = await getSession();
@@ -19,6 +20,7 @@ export default async function Navbar() {
               My Request
             </Link>
             <Notification notifications={notifications} />
+            <ToolsNav />
           </div>
         )}
         {session ? (
