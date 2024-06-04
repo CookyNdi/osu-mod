@@ -46,6 +46,7 @@ export default function FormRequest({ children, targetUserId, username }: FormRe
           setSuccess(data.success);
           if (data.success) {
             setOpen(false);
+            form.reset();
             router.refresh();
           }
         })
