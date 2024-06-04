@@ -22,7 +22,7 @@ export default async function QueuePage({ params }: QueuePageProps) {
   const request = await getAllModderRequest(username);
   return (
     <div className='flex flex-col gap-y-4'>
-      <QueueContent request={request} session={session} />
+      <QueueContent request={request} session={session} username={username} />
       <Footer />
     </div>
   );
