@@ -2,10 +2,10 @@
 
 import { db } from '@/lib/db';
 
-export const getAllActiveModders = async () => {
+export const getAllByFilterActiveModders = async (mode: string[], type: string) => {
   try {
     const user = await db.users.findMany({
-      where: { Settings: { some: { modder_type: 'modder' } } },
+      where: { Settings: { some: { modes: { hasSome: mode }, modder_type: type || 'modder' } } },
       orderBy: { last_action: 'desc' },
       include: {
         Settings: {
@@ -20,7 +20,7 @@ export const getAllActiveModders = async () => {
     return user;
   } catch (error) {
     console.log(error);
-    console.log('getAllActiveModders ISSUE');
+    console.log('getAllByTypeActiveModders ISSUE');
     return [];
   }
 };

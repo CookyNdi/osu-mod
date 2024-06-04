@@ -70,7 +70,7 @@ export default function QueueSettings({ settings, userId }: QueueSettingsProps) 
               <SelectValue placeholder='modes' />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value='standard'>Standard</SelectItem>
+              <SelectItem value='osu'>Standard</SelectItem>
               <SelectItem value='mania'>Mania</SelectItem>
               <SelectItem value='taiko'>Taiko</SelectItem>
               <SelectItem value='catch'>Catch</SelectItem>
@@ -122,7 +122,7 @@ export default function QueueSettings({ settings, userId }: QueueSettingsProps) 
             </SelectTrigger>
             <SelectContent>
               <SelectItem value='modder'>Modder</SelectItem>
-              <SelectItem value='probationary_bn'>Probationary BN</SelectItem>
+              <SelectItem value='Probationary BN'>Probationary BN</SelectItem>
             </SelectContent>
           </Select>
         </div>
