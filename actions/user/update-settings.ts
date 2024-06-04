@@ -28,7 +28,7 @@ export const updateUserSettings = async ({ data }: SettingsData, userId: string)
         modder_type: data.modderType,
       },
     });
-    return { success: 'Setting Updated Successfully' };
+    return { success: 'Settings Updated Successfully' };
   } catch (error) {
     console.log(error);
     console.log('updateUserSettings ISSUE');
