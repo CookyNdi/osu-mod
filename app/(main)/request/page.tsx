@@ -16,7 +16,7 @@ export default async function MyRequestPage() {
   const request = await getAllMyRequest(session);
   return (
     <div className='w-full flex flex-col gap-y-4 pt-4'>
-      <MyRequestContent request={request} />
+      <MyRequestContent request={request} session={session} />
       <Footer />
     </div>
   );
