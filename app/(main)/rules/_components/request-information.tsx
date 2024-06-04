@@ -9,6 +9,7 @@ import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { cn } from '@/lib/utils';
 import { useToast } from '@/components/ui/use-toast';
+import { editRequestInformation } from '@/actions/rules/edit-request-information';
 
 type RequestInformationProps = {
   rules: Rules | null;
@@ -24,26 +25,49 @@ export default function RequestInformation({ rules }: RequestInformationProps) {
 
   const onSubmit = () => {
     startTransition(() => {
-      createRules(note, 'REQUEST_INFORMATION', true)
-        .then((data) => {
-          if (data.error) {
+      if (rules) {
+        editRequestInformation(note, rules.id)
+          .then((data) => {
+            if (data.error) {
+              toast({
+                title: data.error,
+              });
+            }
+            if (data.success) {
+              toast({
+                title: data.success,
+              });
+              setIsVisible(false);
+              router.refresh();
+            }
+          })
+          .catch(() => {
             toast({
-              title: data.error,
+              title: 'Something went wrong',
             });
-          }
-          if (data.success) {
-            toast({
-              title: data.success,
-            });
-            setIsVisible(false);
-            router.refresh();
-          }
-        })
-        .catch(() => {
-          toast({
-            title: 'Something went wrong',
           });
-        });
+      } else {
+        createRules(note, 'REQUEST_INFORMATION', true)
+          .then((data) => {
+            if (data.error) {
+              toast({
+                title: data.error,
+              });
+            }
+            if (data.success) {
+              toast({
+                title: data.success,
+              });
+              setIsVisible(false);
+              router.refresh();
+            }
+          })
+          .catch(() => {
+            toast({
+              title: 'Something went wrong',
+            });
+          });
+      }
     });
   };
   return (
