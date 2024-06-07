@@ -1,8 +1,10 @@
+'use client';
 import Image from 'next/image';
 import { format } from 'date-fns';
-import { FaCheck } from 'react-icons/fa';
+import { FaPlay } from 'react-icons/fa';
 import { FiMessageCircle } from 'react-icons/fi';
 import { FaEdit } from 'react-icons/fa';
+import { IoMdDownload } from 'react-icons/io';
 
 import { Button } from './ui/button';
 import FormManageRequest from './form-manage-request';
@@ -13,6 +15,7 @@ import DiffListIcon from './diff-list-icon';
 import { getDiffColor } from '@/lib/get-diff-color';
 import MyTooltip from './ui/my-tooltip';
 import StatusListIcon from './status-list-icon';
+import usePreview from '@/hooks/usePreview';
 
 type ModdingCardProps = {
   isEditable?: boolean;
@@ -21,11 +24,12 @@ type ModdingCardProps = {
 };
 
 export default function ModdingCard({ isEditable, isModderPage, request }: ModdingCardProps) {
+  const { setPreviewUrl } = usePreview();
   const diffList = request.beatmap.BeatmapSetDiff.sort(
     (a, b) => parseFloat(a.difficulty_rating) - parseFloat(b.difficulty_rating)
   );
   return (
-    <div className='w-full rounded-md overflow-hidden border border-primary/20'>
+    <div className='w-full group rounded-md overflow-hidden border border-primary/20'>
       <div className='relative w-full h-36'>
         <div className='absolute z-20 right-2 top-2 flex gap-x-2'>
           <MyTooltip message={request.status}>
@@ -52,6 +56,15 @@ export default function ModdingCard({ isEditable, isModderPage, request }: Moddi
               <FiMessageCircle size={20} />
             </Button>
           </MapperMessage>
+        </div>
+        <div className='absolute z-20 right-2 bottom-2 hidden group-hover:flex gap-x-2 transition'>
+          <Button
+            className='bg-background/70 p-2 px-3 backdrop-blur-sm border-none'
+            variant='outline'
+            onClick={() => setPreviewUrl(request.beatmap.preview_url)}
+          >
+            <FaPlay />
+          </Button>
         </div>
         {isEditable && (
           <FormManageRequest request={request}>

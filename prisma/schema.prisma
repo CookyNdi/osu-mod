@@ -95,6 +95,7 @@ model Beatmaps {
   bpm            Int
   length         Int
   cover_url      String
+  preview_url    String
   creator        String
   BeatmapSetDiff BeatmapSetDiff[]
   Request        Request[]

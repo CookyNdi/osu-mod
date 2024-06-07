@@ -5,6 +5,7 @@ import '../globals.css';
 import { Toaster } from '@/components/ui/toaster';
 
 import Navbar from '@/components/layout/navbar';
+import PreviewPlayer from '@/components/preview-player';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -22,6 +23,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <Navbar />
         <Toaster />
+        <PreviewPlayer />
         <main className='pt-[60px] px-4 lg:px-8 min-h-[100dvh]'>{children}</main>
       </body>
     </html>

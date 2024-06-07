@@ -27,6 +27,7 @@ export const getAllModderRequest = async (username: string) => {
             bpm: true,
             creator: true,
             cover_url: true,
+            preview_url: true,
             length: true,
             BeatmapSetDiff: {
               select: { id: true, beatmapId: true, difficulty_rating: true, mode: true, version: true },

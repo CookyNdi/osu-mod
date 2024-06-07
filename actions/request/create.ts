@@ -47,6 +47,7 @@ export const createRequest = async (targetUserId: string, values: z.infer<typeof
           bpm: beatmapData.bpm,
           length: beatmapData.beatmaps[0].total_length,
           cover_url: beatmapData.covers.cover,
+          preview_url: beatmapData.preview_url,
           creator: beatmapData.creator,
         },
       });
