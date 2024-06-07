@@ -20,6 +20,18 @@ export const createRequest = async (targetUserId: string, values: z.infer<typeof
   if (!session) return redirect('/auth');
 
   try {
+    const targetUserSetting = await db.settings.findUnique({ where: { userId: targetUserId } });
+    const allRequest = await db.request.findMany({ where: { requestUserId: session.user.id } });
+    const prevRequest = allRequest.sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime())[0];
+
+    const now = new Date();
+    const cooldownTime = targetUserSetting!.request_cooldown * 86400000; // 1 day in milliseconds
+    const timeSinceLastMessage = now.getTime() - prevRequest.createdAt.getTime();
+
+    if (timeSinceLastMessage <= cooldownTime) {
+      return { error: `You can only send one request every ${targetUserSetting!.request_cooldown} days` };
+    }
+
     const beatmapData = await getOsuBeatmapDetails(beatmapsetId);
     if (!beatmapData) return { error: 'Osu Server Data Is Dead' };
     if (beatmapData.error) return { error: beatmapData.error };
