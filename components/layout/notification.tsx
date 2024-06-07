@@ -16,6 +16,8 @@ import { notifications } from '@/types/notification';
 import { readNotification } from '@/actions/notification/read-notification';
 import { bulkReadNotification } from '@/actions/notification/bulk-read-notification';
 import { ScrollArea } from '../ui/scroll-area';
+import { useToast } from '../ui/use-toast';
+import { cn } from '@/lib/utils';
 
 type NotificationProps = {
   notifications: notifications[];
@@ -23,15 +25,51 @@ type NotificationProps = {
 
 export default function Notification({ notifications }: NotificationProps) {
   const router = useRouter();
-  const markAsRead = async (notificationId: string) => {
-    await readNotification(notificationId);
-    router.refresh();
+  const { toast } = useToast();
+
+  const markAsRead = (notificationId: string) => {
+    readNotification(notificationId)
+      .then((data) => {
+        if (data.error) {
+          toast({
+            title: data.error,
+          });
+        }
+        if (data.success) {
+          toast({
+            title: data.success,
+          });
+          router.refresh();
+        }
+      })
+      .catch(() => {
+        toast({
+          title: 'Something went wrong',
+        });
+      });
   };
 
-  const bulkMarkAsRead = async (userId: string) => {
+  const bulkMarkAsRead = (userId: string) => {
     if (userId) {
-      await bulkReadNotification(userId);
-      router.refresh();
+      bulkReadNotification(userId)
+        .then((data) => {
+          if (data.error) {
+            toast({
+              title: data.error,
+            });
+          }
+          if (data.success) {
+            toast({
+              title: data.success,
+            });
+            router.refresh();
+          }
+        })
+        .catch(() => {
+          toast({
+            title: 'Something went wrong',
+          });
+        });
     }
   };
 
@@ -47,7 +85,7 @@ export default function Notification({ notifications }: NotificationProps) {
         <div className='flex justify-between items-center'>
           <DropdownMenuLabel>Notification</DropdownMenuLabel>
           <p
-            className='text-muted-foreground underline text-sm cursor-pointer'
+            className={cn('text-muted-foreground underline text-sm cursor-pointer')}
             onClick={() => bulkMarkAsRead(notifications[0]?.userId)}
           >
             Clear All
@@ -92,7 +130,7 @@ export default function Notification({ notifications }: NotificationProps) {
                     <div className='w-[15%]'>
                       <FaCheck
                         size={24}
-                        className='cursor-pointer hidden group-hover:block'
+                        className={cn('cursor-pointer hidden group-hover:block')}
                         onClick={() => markAsRead(data.id)}
                         title='mark as read'
                       />
