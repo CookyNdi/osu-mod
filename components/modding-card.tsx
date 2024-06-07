@@ -16,6 +16,7 @@ import { getDiffColor } from '@/lib/get-diff-color';
 import MyTooltip from './ui/my-tooltip';
 import StatusListIcon from './status-list-icon';
 import usePreview from '@/hooks/usePreview';
+import DownloadBeatmaps from './download-beatmaps';
 
 type ModdingCardProps = {
   isEditable?: boolean;
@@ -65,6 +66,11 @@ export default function ModdingCard({ isEditable, isModderPage, request }: Moddi
           >
             <FaPlay />
           </Button>
+          <DownloadBeatmaps beatmapsetId={request.beatmapId}>
+            <Button className='bg-background/70 p-2 backdrop-blur-sm border-none' variant='outline'>
+              <IoMdDownload size={20} />
+            </Button>
+          </DownloadBeatmaps>
         </div>
         {isEditable && (
           <FormManageRequest request={request}>
