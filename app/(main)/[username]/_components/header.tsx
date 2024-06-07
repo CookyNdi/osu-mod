@@ -31,9 +31,11 @@ export default async function UserLayoutHeader({ user, rules }: UserLayoutHeader
         </Avatar>
         <div className='relative'>
           <h1 className='text-xl font-semibold'>{user.username}</h1>
-          <MyTooltip message={user.previous_usernames.join(', ')}>
-            <FaIdCard className='absolute -right-6 top-0 hover:-top-[2px] transition cursor-pointer' />
-          </MyTooltip>
+          {user.previous_usernames.length > 0 && (
+            <MyTooltip message={user.previous_usernames.join(', ')}>
+              <FaIdCard className='absolute -right-6 top-0 hover:-top-[2px] transition cursor-pointer' />
+            </MyTooltip>
+          )}
         </div>
         <p className='text-lg text-foreground'>{user.Settings[0].modder_type}</p>
         <div className='flex gap-x-4'>
