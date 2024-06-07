@@ -1,5 +1,6 @@
 'use client';
 import Image from 'next/image';
+import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { IoMdNotifications } from 'react-icons/io';
 import { formatDistanceToNow } from 'date-fns';
@@ -18,12 +19,14 @@ import { bulkReadNotification } from '@/actions/notification/bulk-read-notificat
 import { ScrollArea } from '../ui/scroll-area';
 import { useToast } from '../ui/use-toast';
 import { cn } from '@/lib/utils';
+import Link from 'next/link';
 
 type NotificationProps = {
   notifications: notifications[];
 };
 
 export default function Notification({ notifications }: NotificationProps) {
+  const [open, setOpen] = useState<boolean>(false);
   const router = useRouter();
   const { toast } = useToast();
 
@@ -74,7 +77,7 @@ export default function Notification({ notifications }: NotificationProps) {
   };
 
   return (
-    <DropdownMenu>
+    <DropdownMenu open={open} onOpenChange={setOpen}>
       <DropdownMenuTrigger asChild>
         <div className='relative'>
           <IoMdNotifications size={24} />
@@ -83,7 +86,16 @@ export default function Notification({ notifications }: NotificationProps) {
       </DropdownMenuTrigger>
       <DropdownMenuContent className='w-96 z-[120] p-4' align='end' sideOffset={10}>
         <div className='flex justify-between items-center'>
-          <DropdownMenuLabel>Notification</DropdownMenuLabel>
+          <DropdownMenuLabel className='flex items-center gap-x-2'>
+            Notification{' '}
+            <Link
+              className='text-xs underline text-muted-foreground'
+              href={'/notifications'}
+              onClick={() => setOpen(false)}
+            >
+              All
+            </Link>
+          </DropdownMenuLabel>
           <p
             className={cn('text-muted-foreground underline text-sm cursor-pointer')}
             onClick={() => bulkMarkAsRead(notifications[0]?.userId)}
