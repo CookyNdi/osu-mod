@@ -2,6 +2,17 @@
 
 A website to find modders or Beatmap Nominators and request mods [Here](https://osu-mod.vercel.app/).
 
+## Status Details
+- **Pending** - when a new request is made
+- **Accepted** - when the modder accepts the request
+- **Rejected** - when the modder rejects the request
+- **Modded** - when the modder has finished giving all feedback
+- **Nominated** - when a Beatmap Nominator (BN) nominates the map that was requested
+- **Ranked** - when the map that has been nominated is successfully ranked
+
+## Todo / New Feature 
+idk man, i have no ideas for more feature, [Drop Ideas](https://github.com/CookyNdi/osu-mod#questions--feedback--contribution).
+
 ## Screenshots
 ![1](https://cdn.discordapp.com/attachments/1231040485297229926/1248837989593780255/image.png?ex=66651e83&is=6663cd03&hm=0807ba1ca7e88be6d0cab592bbc895f2fc67ccc96ea83705b6dd1662ed403ffa&)
 
