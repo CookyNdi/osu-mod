@@ -3,15 +3,13 @@
 A website to find modders or Beatmap Nominators and request mods [Here](https://osu-mod.vercel.app/).
 
 ## Screenshots
+![1](https://cdn.discordapp.com/attachments/1231040485297229926/1248837989593780255/image.png?ex=66651e83&is=6663cd03&hm=0807ba1ca7e88be6d0cab592bbc895f2fc67ccc96ea83705b6dd1662ed403ffa&)
 
-- Home page :
-  ![1](https://cdn.discordapp.com/attachments/1231040485297229926/1248837989593780255/image.png?ex=66651e83&is=6663cd03&hm=0807ba1ca7e88be6d0cab592bbc895f2fc67ccc96ea83705b6dd1662ed403ffa&)
-- Queue Page :
-  ![2](https://cdn.discordapp.com/attachments/1231040485297229926/1248838248139329628/image.png?ex=66651ec0&is=6663cd40&hm=549d88d86591594d9aabe777356b71158412a4f228e3dcb5364d2c5bcbe31719&)
-- My Request Page :
-  ![3](https://cdn.discordapp.com/attachments/1231040485297229926/1248838487772364862/image.png?ex=66651ef9&is=6663cd79&hm=16c8ed26a0ea35417e5f9f7eaa5f99ace872a50642f31da75e17b9a39de985a1&)
-- All Notifications Page :
-  ![4](https://cdn.discordapp.com/attachments/1231040485297229926/1248838688990036059/image.png?ex=66651f29&is=6663cda9&hm=d1a9b00cc16cc69cd43db19a26c2e9eb1dd87a1145066e59d8c9d01d1101deb3&)
+![2](https://cdn.discordapp.com/attachments/1231040485297229926/1248838248139329628/image.png?ex=66651ec0&is=6663cd40&hm=549d88d86591594d9aabe777356b71158412a4f228e3dcb5364d2c5bcbe31719&)
+
+![3](https://cdn.discordapp.com/attachments/1231040485297229926/1248838487772364862/image.png?ex=66651ef9&is=6663cd79&hm=16c8ed26a0ea35417e5f9f7eaa5f99ace872a50642f31da75e17b9a39de985a1&)
+
+![4](https://cdn.discordapp.com/attachments/1231040485297229926/1248838688990036059/image.png?ex=66651f29&is=6663cda9&hm=d1a9b00cc16cc69cd43db19a26c2e9eb1dd87a1145066e59d8c9d01d1101deb3&)
 
 ## Setup Project Development
 
@@ -30,6 +28,7 @@ OSU_CLIENT_SECRET=
 NEXTAUTH_URL=
 NEXT_AUTH_SECRET=
 
+// This my other backend server using osu-api-extended by cyperdark
 OSU_API_BASE_URL=
 
 ```
@@ -55,6 +54,10 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 ## Questions / Feedback / Contribution
 
 If you have any questions about This Project or want to contribute by submitting ideas, feel free to ask me in in osu [CookyNdi](https://osu.ppy.sh/users/16983379) or you can add my discord **cookyndi**.
+
+## Facts
+- This Website run in my personal vercel
+- For database i'm using supabase free tier
 
 <details>
   <summary>Not Important</summary>
