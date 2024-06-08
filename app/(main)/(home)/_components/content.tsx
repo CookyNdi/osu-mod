@@ -25,7 +25,7 @@ export default function HomeContents({ users, session }: HomeContentsProps) {
   useEffect(() => {
     if (mode || type) {
       const getAllActiveModders = async () => {
-        const filteredUsers = await getAllByFilterActiveModders([mode], type);
+        const filteredUsers = await getAllByFilterActiveModders(!mode ? ['osu'] : [mode], type);
         setUserDatas(filteredUsers);
       };
       getAllActiveModders();
@@ -64,7 +64,7 @@ export default function HomeContents({ users, session }: HomeContentsProps) {
               <SelectItem value='taiko'>Taiko</SelectItem>
             </SelectContent>
           </Select>
-          <Select onValueChange={setType} defaultValue='modder'>
+          <Select onValueChange={setType}>
             <SelectTrigger className='w-full lg:w-[180px]'>
               <SelectValue placeholder='Type' />
             </SelectTrigger>
