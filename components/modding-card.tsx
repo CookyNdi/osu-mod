@@ -99,7 +99,9 @@ export default function ModdingCard({ isEditable, isModderPage, request }: Moddi
         <Button variant='outline' className='flex gap-x-1 bg-muted hover:bg-muted my-2'>
           {diffList.map((data) => (
             <MyTooltip key={data.id} message={data.version}>
-              <DiffListIcon mode={data.mode} color={getDiffColor(Number(data.difficulty_rating))} />
+              <div>
+                <DiffListIcon mode={data.mode} color={getDiffColor(Number(data.difficulty_rating))} />
+              </div>
             </MyTooltip>
           ))}
         </Button>
