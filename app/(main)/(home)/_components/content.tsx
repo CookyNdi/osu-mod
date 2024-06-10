@@ -9,6 +9,7 @@ import { UsersType } from '@/types/users';
 
 import { getAllByFilterActiveModders } from '@/actions/user/get-all-by-filter-active-modders';
 import HomeCardContent from './card-content';
+import LoadingAnimation from '@/components/animations/loading-animation';
 
 type HomeContentsProps = {
   users: UsersType[];
@@ -21,12 +22,15 @@ export default function HomeContents({ users, session }: HomeContentsProps) {
   const [query, setQuery] = useState<string>('');
   const [mode, setMode] = useState<string>('');
   const [type, setType] = useState<string>('');
+  const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
     if (mode || type) {
+      setLoading(true);
       const getAllActiveModders = async () => {
         const filteredUsers = await getAllByFilterActiveModders(!mode ? ['osu'] : [mode], type);
         setUserDatas(filteredUsers);
+        setLoading(false);
       };
       getAllActiveModders();
     }
@@ -34,9 +38,11 @@ export default function HomeContents({ users, session }: HomeContentsProps) {
 
   useEffect(() => {
     if (query) {
+      setLoading(true);
       const filterUserDatas = () => {
         const filter = userDatas.filter((data) => data.username.toLowerCase().startsWith(query.toLowerCase()));
         setFilteredUserData(filter);
+        setLoading(false);
       };
       filterUserDatas();
     }
@@ -78,30 +84,46 @@ export default function HomeContents({ users, session }: HomeContentsProps) {
       </div>
       {query ? (
         <>
-          {filteredUserData.length < 1 ? (
-            <div className='flex justify-center items-center'>
-              <h1 className='text-lg text-muted-foreground'>there`s nobody here.</h1>
+          {loading ? (
+            <div className='w-full flex justify-center'>
+              <LoadingAnimation isLoading={loading} />
             </div>
           ) : (
-            <div className='grid grid-cols-1 sm:grid-cols-4 gap-4'>
-              {filteredUserData.map((data) => (
-                <HomeCardContent key={data.id} data={data} session={session} />
-              ))}
-            </div>
+            <>
+              {filteredUserData.length < 1 ? (
+                <div className='flex justify-center items-center'>
+                  <h1 className='text-lg text-muted-foreground'>there`s nobody here.</h1>
+                </div>
+              ) : (
+                <div className='grid grid-cols-1 sm:grid-cols-4 gap-4'>
+                  {filteredUserData.map((data) => (
+                    <HomeCardContent key={data.id} data={data} session={session} />
+                  ))}
+                </div>
+              )}
+            </>
           )}
         </>
       ) : (
         <>
-          {userDatas.length < 1 ? (
-            <div className='flex justify-center items-center'>
-              <h1 className='text-lg text-muted-foreground'>there`s nobody here.</h1>
+          {loading ? (
+            <div className='w-full flex justify-center'>
+              <LoadingAnimation isLoading={loading} />
             </div>
           ) : (
-            <div className='grid grid-cols-1 sm:grid-cols-4 gap-4'>
-              {userDatas.map((data) => (
-                <HomeCardContent key={data.id} data={data} session={session} />
-              ))}
-            </div>
+            <>
+              {userDatas.length < 1 ? (
+                <div className='flex justify-center items-center'>
+                  <h1 className='text-lg text-muted-foreground'>there`s nobody here.</h1>
+                </div>
+              ) : (
+                <div className='grid grid-cols-1 sm:grid-cols-4 gap-4'>
+                  {userDatas.map((data) => (
+                    <HomeCardContent key={data.id} data={data} session={session} />
+                  ))}
+                </div>
+              )}
+            </>
           )}
         </>
       )}
