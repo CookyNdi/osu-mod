@@ -17,7 +17,7 @@ export default async function UserLayout({ children, params }: Readonly<UserLayo
 
   return (
     <div className='w-full flex flex-col gap-y-2'>
-      {!user ? (
+      {!user || user.Settings[0].modder_type === 'visitor' ? (
         <div className='flex items-center justify-center h-[80dvh]'>
           <h1 className='text-2xl'>User Not Found!</h1>
         </div>

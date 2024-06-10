@@ -131,6 +131,7 @@ export default function QueueSettings({ settings, userId }: QueueSettingsProps) 
               <SelectValue placeholder='Modder Type' />
             </SelectTrigger>
             <SelectContent>
+              <SelectItem value='visitor'>Visitor</SelectItem>
               <SelectItem value='modder'>Modder</SelectItem>
               <SelectItem value='Probationary BN'>Probationary BN</SelectItem>
             </SelectContent>

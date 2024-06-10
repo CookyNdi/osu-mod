@@ -5,7 +5,7 @@ import { db } from '@/lib/db';
 export const getAllActiveModders = async () => {
   try {
     const user = await db.users.findMany({
-      where: { Settings: { some: { modder_type: 'modder' } } },
+      where: { Settings: { some: { modder_type: 'modder', NOT: { modder_type: 'visitor' } } } },
       orderBy: { last_action: 'desc' },
       include: {
         Settings: {

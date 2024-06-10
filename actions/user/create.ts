@@ -3,7 +3,7 @@ import { OsuUserDetails } from '@/types/osu-respone-api';
 
 export const createUser = async (osuData: OsuUserDetails) => {
   try {
-    const modderType = osuData.title ? osuData.title : 'modder';
+    const modderType = osuData.title ? osuData.title : 'visitor';
     const user = await db.users.create({
       data: {
         id: osuData.id.toString(),
