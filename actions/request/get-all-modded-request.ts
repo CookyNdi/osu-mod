@@ -8,7 +8,7 @@ export const getAllModdedRequest = async (username: string) => {
     const user = await getUserByUsername(username);
     if (!user) return [];
     const request = await db.request.findMany({
-      where: { targetUserId: user.id, status: 'MODDED' },
+      where: { targetUserId: user.id, status: 'MODDED', AND: { archived: false } },
       orderBy: { createdAt: 'desc' },
       include: {
         user: {

@@ -23,7 +23,7 @@ export default function FormManageRequest({ children, request }: FormManageReque
   const [open, setOpen] = useState<boolean>(false);
   const [status, setStatus] = useState<string>(request.status);
   const [feedback, setFeedback] = useState<string>(request.feedback || '');
-  const [archived, setArchived] = useState<boolean>(false);
+  const [archived, setArchived] = useState<boolean>(request.archived || false);
 
   const [isPending, startTransition] = useTransition();
 

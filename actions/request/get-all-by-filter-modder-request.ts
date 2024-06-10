@@ -10,7 +10,7 @@ export const getAllByFilterModderRequest = async (username: string, status: STAT
     const user = await getUserByUsername(username);
     if (!user) return [];
     const request = await db.request.findMany({
-      where: { targetUserId: user.id, status },
+      where: { targetUserId: user.id, status, AND: { archived: false } },
       orderBy: { createdAt: 'desc' },
       include: {
         user: {
