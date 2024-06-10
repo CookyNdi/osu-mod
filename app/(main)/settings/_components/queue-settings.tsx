@@ -11,6 +11,7 @@ import { Label } from '@/components/ui/label';
 import { Switch } from '@/components/ui/switch';
 import { updateUserSettings } from '@/actions/user/update-settings';
 import { useToast } from '@/components/ui/use-toast';
+import LoadingAnimation from '@/components/animations/loading-animation';
 
 type QueueSettingsProps = {
   settings: Settings | null;
@@ -139,7 +140,8 @@ export default function QueueSettings({ settings, userId }: QueueSettingsProps) 
         </div>
       </CardContent>
       <CardFooter>
-        <Button className='w-full' onClick={onSubmit} disabled={isPending}>
+        <Button className='w-full flex items-center gap-x-2' onClick={onSubmit} disabled={isPending}>
+          {isPending && <LoadingAnimation isLoading={isPending} />}
           Save changes
         </Button>
       </CardFooter>

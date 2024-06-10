@@ -5,6 +5,7 @@ import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from '@/comp
 import { Button } from '@/components/ui/button';
 import { updateUserData } from '@/actions/user/update';
 import { useToast } from '@/components/ui/use-toast';
+import LoadingAnimation from '@/components/animations/loading-animation';
 
 type MoreSettingsProps = {
   userId: string;
@@ -45,7 +46,8 @@ export default function MoreSettings({ userId }: MoreSettingsProps) {
         </CardDescription>
       </CardHeader>
       <CardFooter>
-        <Button className='w-full' onClick={onCLick} disabled={isPending}>
+        <Button className='w-full flex items-center gap-x-2' onClick={onCLick} disabled={isPending}>
+          {isPending && <LoadingAnimation isLoading={isPending} />}
           Update Your Account Data
         </Button>
       </CardFooter>

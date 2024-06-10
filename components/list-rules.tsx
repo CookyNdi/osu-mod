@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button';
 import { FaCircleCheck } from 'react-icons/fa6';
 import { IoMdCloseCircle, IoMdClose } from 'react-icons/io';
 import { deleteRules } from '@/actions/rules/delete';
+import LoadingAnimation from './animations/loading-animation';
 
 type ListRulesProps = {
   rules: Rules;
@@ -46,7 +47,14 @@ export default function ListRules({ rules, isEditable }: ListRulesProps) {
         <p>{rules.message}</p>
       </div>
       {isEditable && (
-        <Button className='hidden group-hover:flex' onClick={onClick} size='sm' variant='destructive'>
+        <Button
+          className='hidden group-hover:flex items-center gap-x-2'
+          onClick={onClick}
+          size='sm'
+          variant='destructive'
+          disabled={isPending}
+        >
+          {isPending && <LoadingAnimation isLoading={isPending} />}
           <IoMdClose />
         </Button>
       )}

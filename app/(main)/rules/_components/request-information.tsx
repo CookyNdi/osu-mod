@@ -10,6 +10,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { cn } from '@/lib/utils';
 import { useToast } from '@/components/ui/use-toast';
 import { editRequestInformation } from '@/actions/rules/edit-request-information';
+import LoadingAnimation from '@/components/animations/loading-animation';
 
 type RequestInformationProps = {
   rules: Rules | null;
@@ -81,7 +82,12 @@ export default function RequestInformation({ rules }: RequestInformationProps) {
         value={note}
         disabled={isPending}
       />
-      <Button className={cn('hidden', isVisible && 'flex')} onClick={onSubmit} disabled={isPending}>
+      <Button
+        className={cn('hidden', isVisible && 'flex items-center gap-x-2')}
+        onClick={onSubmit}
+        disabled={isPending}
+      >
+        {isPending && <LoadingAnimation isLoading={isPending} />}
         Save
       </Button>
     </div>

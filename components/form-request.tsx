@@ -13,6 +13,7 @@ import { Input } from './ui/input';
 import { formRequest } from '@/schemas';
 import { createRequest } from '@/actions/request/create';
 import { useToast } from './ui/use-toast';
+import LoadingAnimation from './animations/loading-animation';
 
 type FormRequestProps = {
   children: React.ReactNode;
@@ -102,7 +103,8 @@ export default function FormRequest({ children, targetUserId, username }: FormRe
               />
             </div>
             <DialogFooter>
-              <Button type='submit' disabled={isPending}>
+              <Button type='submit' disabled={isPending} className='flex items-center gap-x-2'>
+                {isPending && <LoadingAnimation isLoading={isPending} />}
                 Request
               </Button>
             </DialogFooter>

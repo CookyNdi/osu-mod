@@ -10,6 +10,7 @@ import { Switch } from '@/components/ui/switch';
 import { Button } from '@/components/ui/button';
 import { createRules } from '@/actions/rules/create';
 import { useToast } from '@/components/ui/use-toast';
+import LoadingAnimation from '@/components/animations/loading-animation';
 
 type AddRulesFormProps = {
   rulesType: RulesType;
@@ -86,7 +87,8 @@ export default function AddRulesForm({ children, rulesType }: AddRulesFormProps)
           </div>
         </div>
         <DialogFooter>
-          <Button type='submit' onClick={onSubmit} disabled={isPending}>
+          <Button type='submit' onClick={onSubmit} disabled={isPending} className='flex items-center gap-x-2'>
+            {isPending && <LoadingAnimation isLoading={isPending} />}
             Save changes
           </Button>
         </DialogFooter>

@@ -12,6 +12,7 @@ import { Textarea } from './ui/textarea';
 import { manageRequest } from '@/actions/request/manage-request';
 import { RequestData } from '@/types/request';
 import { useToast } from '@/components/ui/use-toast';
+import LoadingAnimation from './animations/loading-animation';
 
 type FormManageRequestProps = {
   children: React.ReactNode;
@@ -110,7 +111,8 @@ export default function FormManageRequest({ children, request }: FormManageReque
           </div>
         </div>
         <DialogFooter>
-          <Button type='submit' onClick={onSubmit}>
+          <Button type='submit' onClick={onSubmit} disabled={isPending} className='flex items-center gap-x-2'>
+            {isPending && <LoadingAnimation isLoading={isPending} />}
             Save changes
           </Button>
         </DialogFooter>
