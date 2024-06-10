@@ -25,7 +25,7 @@ export default function RulesList({ children, rules }: RulesListProps) {
         </DialogHeader>
         <div className='w-full bg-muted/20 p-4 flex flex-col gap-y-4 rounded-md'>
           <div className='w-full flex flex-col gap-y-4'>
-            <h1 className='text-lg font-semibold'>Reuqest Information</h1>
+            <h1 className='text-lg font-semibold'>Request Information</h1>
             {requestInformations.length < 1 ? (
               <p className='text-muted-foreground text-sm'>None</p>
             ) : (
