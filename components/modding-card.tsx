@@ -48,29 +48,39 @@ export default function ModdingCard({ isEditable, isModderPage, request }: Moddi
               {format(request.beatmap.length * 1000, 'mm:ss')}
             </Button>
           </MyTooltip>
-          <MapperMessage message={request.mapper_message}>
-            <Button
-              className='bg-background/70 p-2 backdrop-blur-sm border-none'
-              variant='outline'
-              title='Mapper Message!'
-            >
-              <FiMessageCircle size={20} />
-            </Button>
-          </MapperMessage>
+          <MyTooltip message='Mapper Message'>
+            <div>
+              <MapperMessage message={request.mapper_message}>
+                <Button
+                  className='bg-background/70 p-2 backdrop-blur-sm border-none'
+                  variant='outline'
+                  title='Mapper Message!'
+                >
+                  <FiMessageCircle size={20} />
+                </Button>
+              </MapperMessage>
+            </div>
+          </MyTooltip>
         </div>
         <div className='absolute z-20 right-2 bottom-2 hidden group-hover:flex gap-x-2 transition'>
-          <Button
-            className='bg-background/70 p-2 px-3 backdrop-blur-sm border-none'
-            variant='outline'
-            onClick={() => setPreviewUrl(request.beatmap.preview_url)}
-          >
-            <FaPlay />
-          </Button>
-          <DownloadBeatmaps beatmapsetId={request.beatmapId}>
-            <Button className='bg-background/70 p-2 backdrop-blur-sm border-none' variant='outline'>
-              <IoMdDownload size={20} />
+          <MyTooltip message='Song Preview'>
+            <Button
+              className='bg-background/70 p-2 px-3 backdrop-blur-sm border-none'
+              variant='outline'
+              onClick={() => setPreviewUrl(request.beatmap.preview_url)}
+            >
+              <FaPlay />
             </Button>
-          </DownloadBeatmaps>
+          </MyTooltip>
+          <MyTooltip message='Download Beatmaps'>
+            <div>
+              <DownloadBeatmaps beatmapsetId={request.beatmapId}>
+                <Button className='bg-background/70 p-2 backdrop-blur-sm border-none' variant='outline'>
+                  <IoMdDownload size={20} />
+                </Button>
+              </DownloadBeatmaps>
+            </div>
+          </MyTooltip>
         </div>
         {isEditable && (
           <FormManageRequest request={request}>
