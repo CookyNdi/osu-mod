@@ -32,6 +32,12 @@ export const createRequest = async (targetUserId: string, values: z.infer<typeof
       return { error: `You can only send one request every ${targetUserSetting!.request_cooldown} days` };
     }
 
+    const recentRequest = await db.request.findMany({ where: { targetUserId, AND: { status: 'PENDING' } } });
+
+    if (recentRequest.length >= targetUserSetting!.queue_limit) {
+      return { error: `Nice try bro, queue this modder already full for now, try again latter` };
+    }
+
     const beatmapData = await getOsuBeatmapDetails(beatmapsetId);
     if (!beatmapData) return { error: 'Osu Server Data Is Dead' };
     if (beatmapData.error) return { error: beatmapData.error };
