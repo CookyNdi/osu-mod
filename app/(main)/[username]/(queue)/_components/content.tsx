@@ -8,6 +8,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { RequestData } from '@/types/request';
 import ModdingCard from '@/components/modding-card';
 import { getAllByFilterModderRequest } from '@/actions/request/get-all-by-filter-modder-request';
+import LoadingAnimation from '@/components/animations/loading-animation';
 
 type QueueContentProps = {
   request: RequestData[];
@@ -18,6 +19,7 @@ type QueueContentProps = {
 export default function QueueContent({ request, session, username }: QueueContentProps) {
   const [requestData, setRequestData] = useState<RequestData[]>(request);
   const [status, setStatus] = useState<string>('');
+  const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
     setRequestData(request);
@@ -25,9 +27,11 @@ export default function QueueContent({ request, session, username }: QueueConten
 
   useEffect(() => {
     if (status) {
+      setLoading(true);
       const getAllModderRequest = async () => {
         const filteredRequest = await getAllByFilterModderRequest(username, status as STATUS);
         setRequestData(filteredRequest);
+        setLoading(false);
       };
       getAllModderRequest();
     }
@@ -55,21 +59,29 @@ export default function QueueContent({ request, session, username }: QueueConten
           </Select>
         </div>
       </div>
-      {requestData.length < 1 ? (
-        <div className='w-full pt-8 flex justify-center items-center'>
-          <h1 className='capitalize'>Modder haven&apos;t get any request yet.</h1>
+      {loading ? (
+        <div className='w-full flex justify-center'>
+          <LoadingAnimation isLoading={loading} />
         </div>
       ) : (
-        <div className='grid grid-cols-1 sm:grid-cols-3 gap-4'>
-          {requestData.map((data) => (
-            <ModdingCard
-              request={data}
-              key={data.id}
-              isModderPage
-              isEditable={session?.user.name === request[0].user.username}
-            />
-          ))}
-        </div>
+        <>
+          {requestData.length < 1 ? (
+            <div className='w-full pt-8 flex justify-center items-center'>
+              <h1 className='capitalize'>Modder haven&apos;t get any request yet.</h1>
+            </div>
+          ) : (
+            <div className='grid grid-cols-1 sm:grid-cols-3 gap-4'>
+              {requestData.map((data) => (
+                <ModdingCard
+                  request={data}
+                  key={data.id}
+                  isModderPage
+                  isEditable={session?.user.name === request[0].user.username}
+                />
+              ))}
+            </div>
+          )}
+        </>
       )}
     </div>
   );
