@@ -11,7 +11,7 @@ export const editRequestInformation = async (message: string, id: string) => {
     if (!session) return redirect('/auth');
 
     await db.rules.update({ where: { id }, data: { message } });
-    return { success: `Request Information Edited Successfully` };
+    return { success: `Request Information Has Been Edited ` };
   } catch (error) {
     console.log(error);
     console.log('editRequestInformation ISSUE');

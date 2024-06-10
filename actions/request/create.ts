@@ -89,7 +89,7 @@ export const createRequest = async (targetUserId: string, values: z.infer<typeof
       },
     });
 
-    return { success: 'Create Request Successfully' };
+    return { success: 'Your request has been created.' };
   } catch (error) {
     console.log(error);
     console.log('createRequest ISSUE');

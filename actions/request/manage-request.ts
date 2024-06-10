@@ -31,7 +31,7 @@ export const manageRequest = async (
         message: 'changed to',
       },
     });
-    return { success: 'Request Data Changed Successfully' };
+    return { success: 'Your request has been updated.' };
   } catch (error) {
     console.log(error);
     console.log('manageRequest ISSUE');

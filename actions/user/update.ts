@@ -31,7 +31,7 @@ export const updateUserData = async (userId: string) => {
       });
     }
 
-    return { success: 'Update User Data Successfully' };
+    return { success: "Your Osu data's Updated!" };
   } catch (error) {
     console.log(error);
     console.log('updateUserData ISSUE');

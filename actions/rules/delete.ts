@@ -11,7 +11,7 @@ export const deleteRules = async (rulesId: string) => {
     if (!session) return redirect('/auth');
 
     await db.rules.delete({ where: { id: rulesId, userId: session.user.id } });
-    return { success: 'Rules Deleted Successfully' };
+    return { success: 'Rules Has Been Deleted' };
   } catch (error) {
     console.log(error);
     console.log('deleteRules ISSUE');
