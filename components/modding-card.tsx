@@ -81,17 +81,15 @@ export default function ModdingCard({ isEditable, isModderPage, request }: Moddi
               </DownloadBeatmaps>
             </div>
           </MyTooltip>
+          {isEditable && (
+            <FormManageRequest request={request}>
+              <Button className='bg-background/70 p-2 px-[10px] backdrop-blur-sm border-none' variant='outline'>
+                <FaEdit size={18} />
+              </Button>
+            </FormManageRequest>
+          )}
         </div>
-        {isEditable && (
-          <FormManageRequest request={request}>
-            <Button
-              className='absolute z-20 right-2 bottom-2 bg-background/70 p-2 px-[10px] backdrop-blur-sm border-none'
-              variant='outline'
-            >
-              <FaEdit size={18} />
-            </Button>
-          </FormManageRequest>
-        )}
+
         <Image
           className='object-cover z-10'
           src={request.beatmap.cover_url || 'https://assets.ppy.sh/beatmaps/2163775/covers/cover.jpg?1715059832'}
