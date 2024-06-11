@@ -14,13 +14,13 @@ A website to find modders or Beatmap Nominators and request mods [Here](https://
 idk man, i have no ideas for more feature, [Drop Ideas](https://github.com/CookyNdi/osu-mod#questions--feedback--contribution).
 
 ## Screenshots
-![1](https://cdn.discordapp.com/attachments/1231040485297229926/1248837989593780255/image.png?ex=66651e83&is=6663cd03&hm=0807ba1ca7e88be6d0cab592bbc895f2fc67ccc96ea83705b6dd1662ed403ffa&)
+![1](https://i.imgur.com/8h3ugGl.png)
 
-![2](https://cdn.discordapp.com/attachments/1231040485297229926/1248838248139329628/image.png?ex=66651ec0&is=6663cd40&hm=549d88d86591594d9aabe777356b71158412a4f228e3dcb5364d2c5bcbe31719&)
+![2](https://i.imgur.com/Oc8gNir.png)
 
-![3](https://cdn.discordapp.com/attachments/1231040485297229926/1248838487772364862/image.png?ex=66651ef9&is=6663cd79&hm=16c8ed26a0ea35417e5f9f7eaa5f99ace872a50642f31da75e17b9a39de985a1&)
+![3](https://i.imgur.com/7hZJnsY.png)
 
-![4](https://cdn.discordapp.com/attachments/1231040485297229926/1248838688990036059/image.png?ex=66651f29&is=6663cda9&hm=d1a9b00cc16cc69cd43db19a26c2e9eb1dd87a1145066e59d8c9d01d1101deb3&)
+![4](https://i.imgur.com/RPhZhrv.png)
 
 ## Setup Project Development
 
@@ -72,8 +72,8 @@ If you have any questions about This Project or want to contribute by submitting
 
 <details>
   <summary>Not Important</summary>
-
-![1](https://cdn.discordapp.com/attachments/1231040485297229926/1247493854010282084/image.png?ex=6664d7f0&is=66638670&hm=679d96a4d928dcf2113acb5cfddd6983a7585a94f7bbd8b02496ac5f664e93e3&)
-![2](https://cdn.discordapp.com/attachments/1231040485297229926/1247729182448816220/image.png?ex=66650a5a&is=6663b8da&hm=b1b4d23dc1fe439ada118ddf193589240a5b87e4c3acd8666c2ad787b360421c&)
-![3](https://cdn.discordapp.com/attachments/1231040485297229926/1248848238300233760/image.png?ex=6665280e&is=6663d68e&hm=34a44f7f39a4f9570eae6cbe8ae49112b6f4badf9e9355d89d276226881d106f&)
+  
+![1](https://i.imgur.com/YypA6Sy.png)
+![2](https://i.imgur.com/Bky2LJm.png)
+![3](https://i.imgur.com/tLOUB4W.png)
 </details>
