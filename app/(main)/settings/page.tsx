@@ -3,7 +3,7 @@ import { Metadata } from 'next';
 import SettingsTabs from './_components/tabs';
 
 export const metadata: Metadata = {
-  title: 'Osu Mod | Settings',
+  title: 'Modmap | Settings',
 };
 
 export default function SettingsPage() {

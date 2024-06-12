@@ -1,4 +1,4 @@
-<h1 align="center">Osu Modding</h1>
+<h1 align="center">Modmap</h1>
 
 A website to find modders or Beatmap Nominators and request mods [Here](https://osu-mod.vercel.app/).
 

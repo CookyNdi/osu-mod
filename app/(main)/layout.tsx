@@ -10,7 +10,7 @@ import PreviewPlayer from '@/components/preview-player';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'Osu Mod | Home',
+  title: 'Modmap | Home',
 };
 
 export default function RootLayout({

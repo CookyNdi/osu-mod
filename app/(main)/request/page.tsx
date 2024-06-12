@@ -7,7 +7,7 @@ import MyRequestContent from './_components/content';
 import { getSession } from '@/lib/session';
 
 export const metadata: Metadata = {
-  title: 'Osu Mod | My Request',
+  title: 'Modmap | My Request',
 };
 
 export default async function MyRequestPage() {

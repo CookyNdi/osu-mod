@@ -7,7 +7,7 @@ import { getRulesByUserId } from '@/actions/rules/get-by-user-id';
 import { getSession } from '@/lib/session';
 
 export const metadata: Metadata = {
-  title: 'Osu Mod | Rules',
+  title: 'Modmap | Rules',
 };
 
 export default async function RulesPage() {

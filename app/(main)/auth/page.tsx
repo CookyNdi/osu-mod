@@ -3,7 +3,7 @@ import { Metadata } from 'next';
 import AuthCard from './_components/card';
 
 export const metadata: Metadata = {
-  title: 'Osu Mod | Auth',
+  title: 'Modmap | Auth',
 };
 
 export default function AuthPage() {

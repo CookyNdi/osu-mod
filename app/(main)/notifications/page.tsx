@@ -6,7 +6,7 @@ import NotificationList from './_components/notification-list';
 import Footer from '@/components/layout/footer';
 
 export const metadata: Metadata = {
-  title: 'Osu Mod | Notification',
+  title: 'Modmap | Notification',
 };
 
 export default async function NotificationPage() {
