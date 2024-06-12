@@ -40,7 +40,7 @@ export const createRequest = async (targetUserId: string, values: z.infer<typeof
 
     const beatmapData = await getOsuBeatmapDetails(beatmapsetId);
     if (!beatmapData) return { error: 'Osu Server Data Is Dead' };
-    if (beatmapData.error) return { error: beatmapData.error };
+    // if (beatmapData.error) return { error: beatmapData.error };
 
     const existingBeatmap = await db.beatmaps.findUnique({ where: { id: beatmapData.id } });
     let beatmap: Beatmaps;
